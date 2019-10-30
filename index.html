@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="go-debug.js"></script>
+	</head>
+	<body>
+		<div id="myDiagramDiv" style="border: solid 1px blue; width:400px; height:150px"></div>
+		<script>
+			var $ = go.GraphObject.make;    
+			 var diagram = $(go.Diagram, "myDiagramDiv");  
+			 diagram.nodeTemplate =
+			   $(go.Node, "Auto",
+			     $(go.Shape,
+			       { figure: "RoundedRectangle", fill: "white" },  
+			       new go.Binding("fill","color")), 
+			     $(go.TextBlock,
+			       { margin: 5 },
+			       new go.Binding("text", "key"))  
+			    );
+			 
+			 var nodeDataArray = [
+			   { key: "Alpha", color: "lightblue" },  
+			   { key: "Beta", color: "pink" }
+			 ];
+			 var linkDataArray = [
+			   { from: "Alpha", to: "Beta" }
+			 ];
+			 diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+		 </script>		
+	</body>
+</html>
