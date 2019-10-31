@@ -1,7 +1,0 @@
-{
-    "compilerOptions":{
-    	"module": "es6",
-        "sourceMap": true
-    },
-    "files": ["hello.ts"]
-}
