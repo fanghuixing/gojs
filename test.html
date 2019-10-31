@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <script src="go-debug.js"></script>
+    <script src="Figures.js"></script>
+</head>
+
+<body>
+    <div id="myDiagramDiv" style="border: solid 1px blue; width:1024px; height:500px"></div>
+    <script type="text/javascript">
+    var $ = go.GraphObject.make;
+    var violetbrush = $(go.Brush, "Linear", { 0.0: "Violet", 1.0: "Lavender" });
+
+
+    var diagram =
+        $(go.Diagram, "myDiagramDiv", // must name or refer to the DIV HTML element
+            {
+                // don't initialize some properties until after a new model has been loaded
+                "InitialLayoutCompleted": loadDiagramProperties, // a DiagramEvent listener
+
+                // have mouse wheel events zoom in and out instead of scroll up and down
+                "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+
+                // specify a data object to copy for each new Node that is created by clicking
+                "clickCreatingTool.archetypeNodeData": {
+
+                }
+            });
+
+    // the DiagramEvent listener for "InitialLayoutCompleted"
+    function loadDiagramProperties(e) {}
+
+
+    diagram.add(
+        $(go.Node, "Auto",
+            $(go.Shape, "RoundedRectangle", { fill: violetbrush }),
+            $(go.TextBlock, "Hello!", { margin: 5 })
+        ));
+
+
+    diagram.nodeTemplate =
+        $(go.Node, "Auto",
+            $(go.Shape, "RoundedRectangle", { fill: violetbrush }),
+            $(go.TextBlock, "New Node!", { margin: 5 })
+        );
+
+    diagram.add(
+        $(go.Part,
+            $(go.TextBlock, {
+                text: "select and then click to edit",
+                background: "lightblue",
+                editable: true,
+                isMultiline: false
+            })
+        ));
+
+
+    diagram.add(
+        $(go.Part, "Horizontal",
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4
+            }), // default fill and stroke are "black"
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: "green"
+            }),
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: "green",
+                stroke: null
+            }),
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: null,
+                stroke: "green"
+            }),
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: null,
+                stroke: "green",
+                strokeWidth: 3
+            }),
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: null,
+                stroke: "green",
+                strokeWidth: 6
+            }),
+            $(go.Shape, {
+                figure: "Club",
+                width: 40,
+                height: 40,
+                margin: 4,
+                fill: "green",
+                background: "orange"
+            })
+        ));
+
+    diagram.div.style.background = "lightgray";
+    diagram.add(
+        $(go.Part, "Table",
+            $(go.Shape, {
+                row: 0,
+                column: 0,
+                figure: "Club",
+                width: 60,
+                height: 60,
+                margin: 4,
+                fill: "green"
+            }),
+            $(go.TextBlock, "green", { row: 1, column: 0 }),
+            $(go.Shape, {
+                row: 0,
+                column: 1,
+                figure: "Club",
+                width: 60,
+                height: 60,
+                margin: 4,
+                fill: "white"
+            }),
+            $(go.TextBlock, "white", { row: 1, column: 1 }),
+            $(go.Shape, {
+                row: 0,
+                column: 2,
+                figure: "Club",
+                width: 60,
+                height: 60,
+                margin: 4,
+                fill: "transparent"
+            }),
+            $(go.TextBlock, "transparent", { row: 1, column: 2 }),
+            $(go.Shape, {
+                row: 0,
+                column: 3,
+                figure: "Club",
+                width: 60,
+                height: 60,
+                margin: 4,
+                fill: null
+            }),
+            $(go.TextBlock, "null", { row: 1, column: 3 })
+        ));
+
+    var W_geometry = go.Geometry.parse("M 0,0 L 10,50 20,10 30,50 40,0", false);
+    diagram.add(
+        $(go.Part, "Horizontal",
+            $(go.Shape, { geometry: W_geometry, strokeWidth: 2 }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "blue",
+                strokeWidth: 10,
+                strokeJoin: "miter",
+                strokeCap: "butt"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "blue",
+                strokeWidth: 10,
+                strokeJoin: "miter",
+                strokeCap: "round"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "blue",
+                strokeWidth: 10,
+                strokeJoin: "miter",
+                strokeCap: "square"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "green",
+                strokeWidth: 10,
+                strokeJoin: "bevel",
+                strokeCap: "butt"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "green",
+                strokeWidth: 10,
+                strokeJoin: "bevel",
+                strokeCap: "round"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "green",
+                strokeWidth: 10,
+                strokeJoin: "bevel",
+                strokeCap: "square"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "red",
+                strokeWidth: 10,
+                strokeJoin: "round",
+                strokeCap: "butt"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "red",
+                strokeWidth: 10,
+                strokeJoin: "round",
+                strokeCap: "round"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "red",
+                strokeWidth: 10,
+                strokeJoin: "round",
+                strokeCap: "square"
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "purple",
+                strokeWidth: 2,
+                strokeDashArray: [4, 2]
+            }),
+            $(go.Shape, {
+                geometry: W_geometry,
+                stroke: "purple",
+                strokeWidth: 2,
+                strokeDashArray: [6, 6, 2, 2]
+            })
+        ));
+    </script>
+</body>
+
+</html>
