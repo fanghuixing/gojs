@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flowchart</title>
+    <meta name="description" content="交互式流程图设计器" />
+    <meta charset="UTF-8">
+    <script src="js/go.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+<body>
+<div id="sample" style="width: 800px; margin: 0 auto;" >
+  <div style="width: 100%; display: flex; justify-content: space-between">
+    <div id="myPaletteDiv" style="width: 120px; margin-right: 2px; background-color: whitesmoke; border: solid 1px black"></div>
+    <div id="myDiagramDiv" style="flex-grow: 1; height: 500px; border: solid 1px black"></div>
+  </div>
+
+  <button id="saveButton">保存</button>
+  <button id="loadButton">加载</button>
+  图模型保存为JSon格式:
+  <textarea id="mySavedModel" style="width:100%;height:300px">
+  </textarea>
+  <button id="printButton">用SVG打印</button>
+</div>
+</body>
+</html>
